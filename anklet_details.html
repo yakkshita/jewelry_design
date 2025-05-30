@@ -1,0 +1,903 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PDPAOLA | Fine Jewelry</title>
+    <link href="https://fonts.googleapis.com/css2?family=Arsenal:ital,wght@0,400;0,700;1,400;1,700&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            line-height: 1.6;
+            color: #333;
+        }
+
+        /* Header Styles */
+        .header {
+            height: 80px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0.75rem 1.5rem;
+            background: #0A2342;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .nav-left {
+            font-family: 'Arsenal', sans-serif;
+            display: flex;
+            gap: 2rem;
+            font-size: 10px;
+            font-weight: 700;
+        }
+
+        .nav-dropdown {
+            position: relative;
+        }
+
+        .nav-link {
+            text-decoration: none;
+            color: #FFFFFF;
+            font-weight: 510;
+            font-size: 1rem;
+            transition: color 0.3s;
+            background: none;
+            border: none;
+            cursor: pointer;
+        }
+
+        .nav-link:hover {
+            text-decoration: underline;
+            color: #e5e5e5;
+        }
+
+        .dropdown-menu {
+            position: fixed;
+            top: 80px;
+            left:0;
+            width: 100vw;
+            background: white;
+            border: 1px solid #e5e5e5;
+            border-top: none;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+            z-index: 1000;
+        }
+
+        .nav-dropdown:hover .dropdown-menu {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        .dropdown-content {
+            max-width: 1300px;
+            margin: 0 auto;
+            display: flex;
+            padding: 2rem;
+            gap: 2rem;
+        }
+
+        .dropdown-column {
+            flex: 1;
+        }
+
+        .dropdown-column h4 {
+            font-size: 0.9rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            color: #333;
+            border-bottom: 1px solid #e5e5e5;
+            padding-bottom: 0.5rem;
+        }
+
+        .dropdown-column a {
+            display: block;
+            padding: 0.5rem 0;
+            color: #666;
+            text-decoration: none;
+            font-size: 0.8rem;
+            transition: color 0.3s;
+            cursor: pointer;
+        }
+
+        .dropdown-column a:hover {
+            color: #0A2342;
+        }
+
+        .logo {
+            font-family: 'Arsenal', sans-serif;
+            font-size:2.5rem;
+            font-weight: bold;
+            letter-spacing: 0.1em;
+            text-decoration: none;
+            color: #e5e5e5;
+            cursor: pointer;
+        }
+
+        .nav-right {
+            font-family: 'Arsenal', sans-serif;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .nav-icon {
+            background: none;
+            border: none;
+            cursor: pointer;
+            color: #e5e5e5;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 0.25rem;
+            transition: color 0.3s;
+        }
+
+        .nav-icon:hover {
+            color: #2563eb;
+        }
+
+        .icon {
+            width: 18px;
+            height: 18px;
+            stroke: currentColor;
+            fill: none;
+            stroke-width: 2;
+        }
+
+
+        /* Main Content */
+        .product-detail-page {
+            max-width: 100%;
+            margin: 0 auto;
+            padding: 0;
+            background: #fff;
+        }
+
+        .breadcrumb {
+            padding: 1rem;
+            font-size: 0.9rem;
+            color: #666;
+        }
+
+        .breadcrumb a {
+            color: #000;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        .breadcrumb a:hover {
+            text-decoration: underline;
+        }
+
+        /* Product Grid Layout */
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            grid-template-rows: auto auto;
+            width: 100%;
+        }
+
+        /* Main Image - Top Left */
+        .main-image {
+            grid-column: 1;
+            grid-row: 1;
+            width: 100%;
+            height: 100%;
+        }
+
+        .main-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        /* Product Info - Top Right */
+        .product-info {
+            grid-column: 2;
+            grid-row: 1;
+            padding: 2rem;
+            background: #fff;
+        }
+
+        .stock-status {
+            color: #059669;
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+            font-weight: 500;
+        }
+
+        .product-title {
+            font-size: 2rem;
+            font-weight: 300;
+            margin-bottom: 1.5rem;
+            line-height: 1.2;
+        }
+
+        .product-price {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 2rem;
+            color: #333;
+        }
+
+        /* Material Dropdown Styles */
+        .material-selector {
+            margin-bottom: 2rem;
+        }
+
+        .material-selector h4 {
+            font-size: 0.9rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            text-transform: uppercase;
+        }
+
+        .dropdown-container {
+            position: relative;
+            display: inline-block;
+            width: 100%;
+        }
+
+        .material-dropdown {
+            width: 100%;
+            padding: 0.75rem 2.5rem 0.75rem 0.75rem;
+            border: 1px solid #ddd;
+            background: white;
+            font-size: 1rem;
+            font-weight: 500;
+            cursor: pointer;
+            appearance: none;
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            transition: all 0.3s;
+        }
+
+        .material-dropdown:hover, .material-dropdown:focus {
+            border-color: #000;
+            outline: none;
+        }
+
+        .dropdown-arrow {
+            position: absolute;
+            right: 0.75rem;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 16px;
+            height: 16px;
+            pointer-events: none;
+            color: #666;
+        }
+
+        .size-selector {
+            margin-bottom: 2rem;
+        }
+
+        .size-selector h4 {
+            font-size: 0.9rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            text-transform: uppercase;
+        }
+
+        .size-options {
+            display: flex;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+        }
+
+        .size-option {
+            padding: 0.75rem 1rem;
+            border: 1px solid #ddd;
+            background: white;
+            cursor: pointer;
+            font-weight: 500;
+            transition: all 0.3s;
+            min-width: 50px;
+            text-align: center;
+        }
+
+        .size-option:hover:not(.unavailable), .size-option.selected {
+            border-color: #000;
+            background: #000;
+            color: white;
+        }
+
+        .size-option.unavailable {
+            background: #f3f4f6;
+            color: #9ca3af;
+            border-color: #e5e7eb;
+            cursor: not-allowed;
+            position: relative;
+        }
+
+        .size-option.unavailable::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background-color: #9ca3af;
+            transform: rotate(-10deg);
+        }
+
+        .add-to-bag-btn {
+            width: 170px;
+            padding: 1rem 2rem;
+            background: #1a237e;
+            color: white;
+            border: none;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            margin-bottom: 2rem;
+            text-transform: uppercase;
+        }
+
+        .add-to-bag-btn:hover {
+            background: #0A2342;
+        }
+
+        .size-display {
+            font-size: 0.9rem;
+            color: #666;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+        }
+
+        /* Product Tabs */
+        .product-tabs {
+            margin-top: 2rem;
+            border-bottom: none;
+        }
+
+        .tab-buttons {
+            display: flex;
+            gap: 2rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .tab-btn {
+            padding: 0.5rem 0;
+            background: none;
+            border: none;
+            font-size: 0.9rem;
+            font-weight: 600;
+            cursor: pointer;
+            text-transform: uppercase;
+            color: #666;
+            border-bottom: 2px solid transparent;
+            transition: all 0.3s;
+        }
+
+        .tab-btn.active {
+            color: #000;
+            border-bottom: 2px solid #000;
+        }
+
+        .tab-content {
+            display: none;
+            padding-top: 1rem;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        .description-text {
+            font-size: 1rem;
+            line-height: 1.6;
+            margin-bottom: 1.5rem;
+        }
+
+        /* Additional Images Grid */
+        .additional-images {
+            grid-column: 1 / span 2;
+            grid-row: 2;
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            width: 100%;
+        }
+
+        .additional-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        /* Footer */
+        .footer {
+            background: #0A2342;
+            color: white;
+            padding: 3rem 0;
+            margin-top: 3rem;
+        }
+
+        .footer-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 1rem;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-column h3 {
+            font-weight: 600;
+            margin-bottom: 0.75rem;
+            font-size: 0.9rem;
+        }
+
+        .footer-column ul {
+            list-style: none;
+        }
+
+        .footer-column ul li {
+            margin-bottom: 0.4rem;
+        }
+
+        .footer-column ul li a {
+            color: #d1d5db;
+            text-decoration: none;
+            font-size: 0.8rem;
+            cursor: pointer;
+        }
+
+        .footer-column ul li a:hover {
+            color: white;
+        }
+
+        .footer-bottom {
+            border-top: 1px solid #374151;
+            padding-top: 1.5rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .newsletter {
+            flex: 1;
+            max-width: 350px;
+        }
+
+        .newsletter h4 {
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            font-size: 0.9rem;
+        }
+
+        .newsletter-form {
+            display: flex;
+        }
+
+        .newsletter input {
+            flex: 1;
+            padding: 0.4rem 0.75rem;
+            background: #374151;
+            border: 1px solid #4b5563;
+            border-radius: 4px 0 0 4px;
+            color: white;
+            font-size: 0.8rem;
+        }
+
+        .newsletter input::placeholder {
+            color: #9ca3af;
+        }
+
+        .btn-newsletter {
+            background: #1a237e;
+            color: white;
+            border: none;
+            padding: 0.4rem 1rem;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .btn-newsletter:hover {
+            background: #0d1b69;
+        }
+
+        .social {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            font-size: 0.8rem;
+            color: #d1d5db;
+        }
+
+        /* Mobile Responsive */
+        @media (max-width: 768px) {
+            .nav-left {
+                display: none;
+            }
+
+            .product-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .main-image {
+                grid-column: 1;
+                grid-row: 1;
+            }
+
+            .product-info {
+                grid-column: 1;
+                grid-row: 2;
+                padding: 1rem;
+            }
+
+            .additional-images {
+                grid-column: 1;
+                grid-row: 3;
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .footer-bottom {
+                flex-direction: column;
+                text-align: center;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .header {
+                padding: 0.5rem 1rem;
+            }
+
+            .logo {
+                font-size: 1.1rem;
+            }
+
+            .additional-images {
+                grid-template-columns: 1fr;
+            }
+
+            .size-options {
+                justify-content: flex-start;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <nav class="nav-left">
+            <a class="nav-link" href="index.html">JEWELRY</a>
+            <a class="nav-link" href="index.html">GIFTS</a>
+            <a class="nav-link" href="index.html">STORES</a>
+        </nav>
+
+        <a class="logo" href="index.html">PDPAOLA</a>
+
+        <div class="nav-right">
+            <button class="nav-icon" aria-label="Search">
+                <svg class="icon" viewBox="0 0 24 24">
+                    <circle cx="11" cy="11" r="8"></circle>
+                    <path d="m21 21-4.35-4.35"></path>
+                </svg>
+            </button>
+            <button class="nav-icon" aria-label="Cart">
+                <svg class="icon" viewBox="0 0 24 24">
+                    <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path>
+                    <line x1="3" y1="6" x2="21" y2="6"></line>
+                    <path d="M16 10a4 4 0 0 1-8 0"></path>
+                </svg>
+            </button>
+            <button class="nav-icon" aria-label="Wishlist">
+                <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" 
+                    stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M20.8 4.6c-1.4-1.4-3.6-1.4-5 0L12 8.4 8.2 4.6c-1.4-1.4-3.6-1.4-5 0s-1.4 3.6 0 5L12 21l8.8-11.4c1.4-1.4 1.4-3.6 0-5z"/>
+                </svg>
+            </button>
+            <button class="nav-icon" aria-label="Login">
+                <svg class="icon" viewBox="0 0 24 24">
+                    <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                    <circle cx="12" cy="7" r="4"></circle>
+                </svg>
+            </button>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <div class="product-detail-page">
+        <div class="breadcrumb">
+            <a href="index.html">Home</a> > <a href="anklets_page.html">Anklets</a> > <span>Chained Anklet</span>
+        </div>
+
+        <div class="product-grid">
+            <!-- Main Image - Top Left -->
+            <div class="main-image">
+                <img src="ank1.webp" alt="Chained Anklet">
+            </div>
+
+            <!-- Product Info - Top Right -->
+            <div class="product-info">
+                <div class="stock-status">In Stock: Ships in 1-3 business days</div>
+                
+                <h1 class="product-title">Chained Anklet</h1>
+                
+                <div class="product-price">Rs. 25,000.00</div>
+
+                <div class="material-selector">
+                    <h4>Material</h4>
+                    <div class="dropdown-container">
+                        <select class="material-dropdown" id="materialSelect">
+                            <option value="yellow-gold">Yellow Gold</option>
+                            <option value="rose-gold">Rose Gold</option>
+                            <option value="white-gold">White Gold</option>
+                        </select>
+                        <svg class="dropdown-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <polyline points="6,9 12,15 18,9"></polyline>
+                        </svg>
+                    </div>
+                </div>
+
+                <div class="size-selector">
+                    <h4>Size</h4>
+                    <div id="sizeDisplay" class="size-display" style="display: none;">To Fit: Size 8</div>
+                    <div class="size-options">
+                        <div class="size-option" data-size="8" data-fit="8">S</div>
+                        <div class="size-option" data-size="9" data-fit="10">M</div>
+                        <div class="size-option unavailable" data-size="10" data-available="false" data-fit="12">L</div>
+                    </div>
+                </div>
+
+                <button class="add-to-bag-btn" onclick="addToBag()">Add to Bag</button>
+
+                <div class="product-tabs">
+                    <div class="tab-buttons">
+                        <button class="tab-btn active" onclick="showTab('description')">DESCRIPTION</button>
+                        <button class="tab-btn" onclick="showTab('materials')">MATERIALS</button>
+                    </div>
+                    
+                    <div id="description" class="tab-content active">
+                        <p class="description-text">
+                            Artful androgyny. The dual nature of Los Angeles is the inspiration for this tactile Havana Chain Anklet. Crafted from recycled 14Kt gold, its tightly interlocking XL links reflect the light and complement both masculine and feminine styles.
+                        </p>
+                        <ul class="product-features">
+                            <li>14Kt Yellow Gold XL Lightweight Havana Chain Anklet</li>
+                            <li>Width: 3.3mm</li>
+                            <li>Length: 10"</li>
+                            <li>Made in Italy</li>
+                            <li>Email Support@lorenstewart.com for alternative length options</li>
+                        </ul>
+                    </div>
+
+                    <div id="materials" class="tab-content">
+                        <ul class="product-features">
+                            <li>14Kt Recycled Yellow Gold</li>
+                            <li>Hypoallergenic</li>
+                            <li>Water Resistant</li>
+                            <li>Tarnish Resistant</li>
+                            <li>Ethically Sourced Materials</li>
+                            <li>Lifetime Warranty</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Additional Images Grid -->
+            <div class="additional-images">
+                <img src="ank1_2.webp" alt="Anklet detail view" class="additional-image">
+                <img src="ank1_3.webp" alt="Anklet worn on ankle" class="additional-image">
+                <img src="ank1_4.webp" alt="Anklet close-up" class="additional-image">
+                <img src="ank1_5.webp" alt="Anklet styling" class="additional-image">
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-grid">
+                <div class="footer-column">
+                    <h3>Contact</h3>
+                    <ul>
+                        <li><a>Customer Service</a></li>
+                        <li><a>Size Guide</a></li>
+                        <li><a>Care Guide</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Information</h3>
+                    <ul>
+                        <li><a>Shipping</a></li>
+                        <li><a>Returns</a></li>
+                        <li><a>Exchange</a></li>
+                        <li><a>Privacy Policy</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>About Us</h3>
+                    <ul>
+                        <li><a>Our Story</a></li>
+                        <li><a>Sustainability</a></li>
+                        <li><a>Press</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Jewelry</h3>
+                    <ul>
+                        <li><a href="index.html">Necklaces</a></li>
+                        <li><a href="index.html">Earrings</a></li>
+                        <li><a href="index.html">Rings</a></li>
+                        <li><a href="index.html">Bracelets</a></li>
+                        <li><a href="anklets_page.html">Anklets</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <div class="newsletter">
+                    <h4>Want 10% off your first order? Sign up!</h4>
+                    <form class="newsletter-form" onsubmit="handleNewsletterSubmit(event)">
+                        <input type="email" name="email" placeholder="Enter your email" required>
+                        <button type="submit" class="btn-newsletter">Subscribe</button>
+                    </form>
+                </div>
+                <div class="social">
+                    <span>Follow us:</span>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        let selectedSize = null;
+
+        // Size selection functionality
+        document.querySelectorAll('.size-option').forEach(option => {
+            option.addEventListener('click', function() {
+                // Skip if size is unavailable
+                if (this.classList.contains('unavailable')) {
+                    return;
+                }
+                
+                document.querySelectorAll('.size-option').forEach(opt => {
+                    opt.classList.remove('selected');
+                });
+                
+                this.classList.add('selected');
+                selectedSize = this.dataset.size;
+                
+                // Show size fit information
+                const sizeDisplay = document.getElementById('sizeDisplay');
+                const fitSize = this.dataset.fit;
+                sizeDisplay.textContent = `To Fit: Size ${fitSize}`;
+                sizeDisplay.style.display = 'block';
+            });
+        });
+
+        // Add to bag functionality
+        function addToBag() {
+            if (!selectedSize) {
+                alert('Please select a size first!');
+                return;
+            }
+            
+            const product = {
+                name: 'Chained Anklet',
+                price: '25,000',
+                size: selectedSize,
+                image: 'ank1.webp'
+            };
+            
+            // Get existing cart or create new one
+            let cart = JSON.parse(localStorage.getItem('cart')) || [];
+            
+            // Check if item already exists in cart
+            const existingItem = cart.find(item => 
+                item.name === product.name && item.size === product.size
+            );
+            
+            if (existingItem) {
+                existingItem.quantity += 1;
+            } else {
+                cart.push({
+                    ...product,
+                    id: Date.now(),
+                    quantity: 1
+                });
+            }
+            
+            localStorage.setItem('cart', JSON.stringify(cart));
+            
+            // Show success message
+            showNotification(`Added "${product.name}" (Size: ${product.size}) to bag!`);
+        }
+
+        function handleNewsletterSubmit(event) {
+            event.preventDefault();
+            const formData = new FormData(event.target);
+            const email = formData.get('email');
+            
+            if (email) {
+                showNotification(`Thank you for subscribing!`);
+                event.target.reset();
+            } else {
+                alert('Please enter a valid email address.');
+            }
+        }
+
+        function showNotification(message) {
+            const notification = document.createElement('div');
+            notification.className = 'notification';
+            notification.textContent = message;
+            notification.style.cssText = `
+                position: fixed;
+                top: 20px;
+                right: 20px;
+                background: #000;
+                color: white;
+                padding: 1rem 1.5rem;
+                z-index: 1000;
+                animation: slideIn 0.3s ease;
+            `;
+            
+            const style = document.createElement('style');
+            style.textContent = `
+                @keyframes slideIn {
+                    from { transform: translateX(100%); opacity: 0; }
+                    to { transform: translateX(0); opacity: 1; }
+                }
+                @keyframes slideOut {
+                    from { transform: translateX(0); opacity: 1; }
+                    to { transform: translateX(100%); opacity: 0; }
+                }
+            `;
+            document.head.appendChild(style);
+            document.body.appendChild(notification);
+            
+            setTimeout(() => {
+                notification.style.animation = 'slideOut 0.3s ease';
+                setTimeout(() => {
+                    if (document.body.contains(notification)) {
+                        document.body.removeChild(notification);
+                    }
+                    if (document.head.contains(style)) {
+                        document.head.removeChild(style);
+                    }
+                }, 300);
+            }, 3000);
+        }
+
+        function showTab(tabId) {
+            // Hide all tab contents
+            const tabContents = document.querySelectorAll('.tab-content');
+            tabContents.forEach(content => {
+                content.classList.remove('active');
+            });
+
+            // Deactivate all tab buttons
+            const tabButtons = document.querySelectorAll('.tab-btn');
+            tabButtons.forEach(button => {
+                button.classList.remove('active');
+            });
+
+            // Activate the selected tab content and button
+            document.getElementById(tabId).classList.add('active');
+            document.querySelector(`.tab-btn[onclick="showTab('${tabId}')"]`).classList.add('active');
+        }
+    </script>
+</body>
+</html>

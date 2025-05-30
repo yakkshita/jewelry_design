@@ -1,0 +1,1165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PDPAOLA | Fine Jewelry</title>
+    <link href="https://fonts.googleapis.com/css2?family=Arsenal:ital,wght@0,400;0,700;1,400;1,700&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            line-height: 1.6;
+            color: #333;
+        }
+
+        /* Header Styles */
+        .header {
+            height: 80px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0.75rem 1.5rem;
+            background: #0A2342;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .nav-left {
+            font-family: 'Arsenal', sans-serif;
+            display: flex;
+            gap: 2rem;
+            font-size: 10px;
+            font-weight: 700;
+        }
+
+        .nav-dropdown {
+            position: relative;
+        }
+
+        .nav-link {
+            text-decoration: none;
+            color: #FFFFFF;
+            font-weight: 510;
+            font-size: 1rem;
+            transition: color 0.3s;
+            background: none;
+            border: none;
+            cursor: pointer;
+        }
+
+        .nav-link:hover {
+            text-decoration: underline;
+            color: #e5e5e5;
+        }
+
+        .dropdown-menu {
+            position: fixed;
+            top: 80px;
+            left:0;
+            width: 100vw;
+            background: white;
+            border: 1px solid #e5e5e5;
+            border-top: none;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+            z-index: 1000;
+        }
+
+        .nav-dropdown:hover .dropdown-menu {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        .dropdown-content {
+            max-width: 1300px;
+            margin: 0 auto;
+            display: flex;
+            padding: 2rem;
+            gap: 2rem;
+        }
+
+        .dropdown-column {
+            flex: 1;
+        }
+
+        .dropdown-column h4 {
+            font-size: 0.9rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            color: #333;
+            border-bottom: 1px solid #e5e5e5;
+            padding-bottom: 0.5rem;
+        }
+
+        .dropdown-column a {
+            display: block;
+            padding: 0.5rem 0;
+            color: #666;
+            text-decoration: none;
+            font-size: 0.8rem;
+            transition: color 0.3s;
+            cursor: pointer;
+        }
+
+        .dropdown-column a:hover {
+            color: #0A2342;
+        }
+
+        .logo {
+            font-family: 'Arsenal', sans-serif;
+            font-size:2.5rem;
+            font-weight: bold;
+            letter-spacing: 0.1em;
+            text-decoration: none;
+            color: #e5e5e5;
+            cursor: pointer;
+        }
+
+        .nav-right {
+            font-family: 'Arsenal', sans-serif;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .nav-icon {
+            background: none;
+            border: none;
+            cursor: pointer;
+            color: #e5e5e5;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 0.25rem;
+            transition: color 0.3s;
+        }
+
+        .nav-icon:hover {
+            color: #2563eb;
+        }
+
+        .icon {
+            width: 18px;
+            height: 18px;
+            stroke: currentColor;
+            fill: none;
+            stroke-width: 2;
+        }
+
+
+        /* Main Content */
+        .anklets-page {
+            max-width: 100%;
+            margin: 0 auto;
+            padding: 1rem;
+            min-height: 100vh;
+        }
+
+        .breadcrumb {
+            padding: 1rem 0;
+            font-size: 0.9rem;
+            color: #666;
+            max-width: 1400px;
+            margin-left: 25px;
+        }
+
+        .breadcrumb a {
+            color: #0A2342;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        .breadcrumb a:hover {
+            text-decoration: underline;
+        }
+
+        .page-title {
+            text-align: left;
+            margin-left: 20px;
+            margin-bottom: 2rem;
+        }
+
+        .page-title h1 {
+            font-size: 2.5rem;
+            font-weight: 300;
+            margin-bottom: 0.5rem;
+            letter-spacing: 0.1em;
+        }
+
+        .page-title p {
+            color: #666;
+            font-size: 1rem;
+        }
+
+        .filter-options {
+            font-family: 'Arsenal', sans-serif;
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 2rem;
+            padding-bottom: 0.5rem;
+            margin-left: 20px;
+        }
+
+        .filter-btn {
+            padding: 0.5rem 1rem;
+            border: 1px solid #ddd;
+            background: white;
+            border-radius: 20px;
+            cursor: pointer;
+            white-space: nowrap;
+            transition: all 0.3s;
+            font-size: 0.8rem;
+        }
+
+        .filter-btn:hover, .filter-btn.active {
+            background: #0A2342;
+            color: white;
+            border-color: #0A2342;
+        }
+
+        .anklets-content {
+            display: block;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .anklets-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 2rem;
+        }
+
+        .anklet-product {
+            background: white;
+            border-radius: 8px;
+            overflow: hidden;
+            transition: transform 0.3s ease;
+        }
+
+        .anklet-product:hover {
+            transform: translateY(-5px);
+        }
+
+        .product-image-container {
+            position: relative;
+            aspect-ratio: 1;
+            overflow: hidden;
+        }
+
+        .product-image, .product-image-hover {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: opacity 0.3s ease;
+        }
+
+        .product-image-hover {
+            position: absolute;
+            top: 0;
+            left: 0;
+            opacity: 0;
+        }
+
+        .anklet-product:hover .product-image {
+            opacity: 0;
+        }
+
+        .anklet-product:hover .product-image-hover {
+            opacity: 1;
+        }
+
+        .wishlist-btn {
+            position: absolute;
+            top: 0.5rem;
+            right: 0.5rem;
+            background: white;
+            border: none;
+            border-radius: 50%;
+            width: 30px;
+            height: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .anklet-product:hover .wishlist-btn {
+            opacity: 1;
+        }
+
+        .wishlist-icon {
+            width: 14px;
+            height: 14px;
+            stroke-width: 2;
+            stroke: currentColor;
+            fill: none;
+        }
+
+        .wishlist-icon.filled {
+            fill: #ef4444;
+            stroke: #ef4444;
+        }
+
+        .product-info {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem;
+        }
+
+        .product-details {
+            flex: 1;
+        }
+
+        .product-details h3 {
+            font-size: 0.9rem;
+            font-weight: 500;
+            margin-bottom: 0.5rem;
+        }
+
+        .product-details .price {
+            font-size: 1rem;
+            font-weight: 600;
+            color: #333;
+        }
+
+        .add-to-cart {
+            padding: 0.4rem 1rem;
+            background: transparent;
+            border: 2px solid #333;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 0.8rem;
+            transition: all 0.3s ease;
+            color: #333;
+            font-weight: 500;
+            text-align: center;
+            white-space: nowrap;
+        }
+
+        .add-to-cart:hover {
+            background: #0A2342;
+            color: white;
+            border-color: #0A2342;
+        }
+
+       .size-availability {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background:transparent;
+            color: #0A2342;
+            padding: 1rem;
+            transform: translateY(100%);
+            transition: transform 0.3s ease;
+            text-align: center;
+            display:flex;
+            flex-direction: column-reverse;
+            gap:0.5rem;
+        }
+
+        .anklet-product:hover .size-availability {
+            transform: translateY(0);
+        }
+
+        .size-availability h4 {
+            background: #0A2342 35%;
+            color: white;
+            padding: 0.5rem;
+            font-size: 0.8rem;
+            margin: 0;
+            font-weight: 500;
+            text-transform: uppercase;
+        }
+
+        .size-list {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .size-item {
+            color: #0A2342;
+            background: transparent;
+            border: none;
+            border-radius: 4px;
+            padding: 0.25rem;
+            font-size: 0.9rem;
+            font-weight: 600;
+            min-width: 30px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .size-item:hover {
+            background: #f0f0f0;
+            color: black;
+        }
+
+        /* Footer */
+        .footer {
+            background: #0A2342;
+            color: white;
+            padding: 3rem 0;
+            margin-top: 3rem;
+        }
+
+        .footer-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 1rem;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-column h3 {
+            font-weight: 600;
+            margin-bottom: 0.75rem;
+            font-size: 0.9rem;
+        }
+
+        .footer-column ul {
+            list-style: none;
+        }
+
+        .footer-column ul li {
+            margin-bottom: 0.4rem;
+        }
+
+        .footer-column ul li a {
+            color: #d1d5db;
+            text-decoration: none;
+            font-size: 0.8rem;
+            cursor: pointer;
+        }
+
+        .footer-column ul li a:hover {
+            color: white;
+        }
+
+        .footer-bottom {
+            border-top: 1px solid #374151;
+            padding-top: 1.5rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .newsletter {
+            flex: 1;
+            max-width: 350px;
+        }
+
+        .newsletter h4 {
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            font-size: 0.9rem;
+        }
+
+        .newsletter-form {
+            display: flex;
+        }
+
+        .newsletter input {
+            flex: 1;
+            padding: 0.4rem 0.75rem;
+            background: #374151;
+            border: 1px solid #4b5563;
+            border-radius: 4px 0 0 4px;
+            color: white;
+            font-size: 0.8rem;
+        }
+
+        .newsletter input::placeholder {
+            color: #9ca3af;
+        }
+
+        .btn-newsletter {
+            border-radius: 0 20px 20px 0;
+            background: #1e3a8a;
+            color: white;
+            border: 2px solid #1e3a8a;
+            padding: 0.4rem 1rem;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .btn-newsletter:hover {
+            background: #1d4ed8;
+            border-color: #1d4ed8;
+        }
+
+        .social {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            font-size: 0.8rem;
+            color: #d1d5db;
+        }
+
+        /* Mobile Responsive */
+        @media (max-width: 992px) {
+            .anklets-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .nav-left {
+                display: none;
+            }
+
+            .anklets-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 1rem;
+            }
+
+            .filter-options {
+                padding: 0 0.75rem;
+                justify-content: flex-start;
+            }
+
+            .page-title h1 {
+                font-size: 2rem;
+            }
+
+            .footer-bottom {
+                flex-direction: column;
+                text-align: center;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .header {
+                padding: 0.5rem 1rem;
+            }
+
+            .logo {
+                font-size: 1.1rem;
+            }
+
+            .anklets-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .page-title h1 {
+                font-size: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <nav class="nav-left">
+            <a class="nav-link" href="index.html">JEWELRY</a>
+            <a class="nav-link" href="index.html">GIFTS</a>
+            <a class="nav-link" href="index.html">STORES</a>
+        </nav>
+
+        <a class="logo" href="index.html">PDPAOLA</a>
+
+        <div class="nav-right">
+            <button class="nav-icon" aria-label="Search">
+                <svg class="icon" viewBox="0 0 24 24">
+                    <circle cx="11" cy="11" r="8"></circle>
+                    <path d="m21 21-4.35-4.35"></path>
+                </svg>
+            </button>
+            <button class="nav-icon" aria-label="Cart">
+                <svg class="icon" viewBox="0 0 24 24">
+                    <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path>
+                    <line x1="3" y1="6" x2="21" y2="6"></line>
+                    <path d="M16 10a4 4 0 0 1-8 0"></path>
+                </svg>
+            </button>
+            <button class="nav-icon" aria-label="Wishlist">
+                <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" 
+                    stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M20.8 4.6c-1.4-1.4-3.6-1.4-5 0L12 8.4 8.2 4.6c-1.4-1.4-3.6-1.4-5 0s-1.4 3.6 0 5L12 21l8.8-11.4c1.4-1.4 1.4-3.6 0-5z"/>
+                </svg>
+            </button>
+            <button class="nav-icon" aria-label="Login">
+                <svg class="icon" viewBox="0 0 24 24">
+                    <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                    <circle cx="12" cy="7" r="4"></circle>
+                </svg>
+            </button>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <div class="anklets-page">
+        <div class="breadcrumb">
+            <a href="index.html">Home</a> > <a href="index.html">Jewelry</a> > <span>Anklets</span>
+        </div>
+
+        <div class="page-title">
+            <h1>ANKLETS</h1>
+            <p>Add a touch of elegance to your ankles with our beautiful collection of anklets.</p>
+        </div>
+
+        <div class="filter-options">
+            <button class="filter-btn active">Best Sellers</button>
+            <button class="filter-btn">Gold Anklets</button>
+            <button class="filter-btn">Silver Anklets</button>
+            <button class="filter-btn">Chain Anklets</button>
+            <button class="filter-btn">Charm Anklets</button>
+            <button class="filter-btn">Beaded Anklets</button>
+        </div>
+
+        <div class="anklets-content">
+            <div class="anklets-grid">
+                <!-- Anklet Product 2 -->
+                 <a href="anklet_details.html" style="text-decoration:none; color: inherit;">
+                <div class="anklet-product">
+                    <div class="product-image-container">
+                        <img src="anklet2.webp" alt="Silver Charm Anklet" class="product-image">
+                        <img src="anklet2_hover.webp" alt="Silver Charm Anklet worn" class="product-image-hover">
+                        <button class="wishlist-btn" onclick="toggleWishlist(this, 102)">
+                            <svg class="wishlist-icon" viewBox="0 0 24 24">
+                                <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
+                            </svg>
+                        </button>
+                        <div class="size-availability">
+                            <h4>SELECT SIZE</h4>
+                            <div class="size-list">
+                                <span class="size-item">S</span>
+                                <span class="size-item">M</span>
+                                <span class="size-item">L</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="product-info">
+                        <div class="product-details">
+                            <h3>Chained Anklet</h3>
+                            <p class="price">Rs. 25,000.00</p>
+                        </div>
+                        <button class="add-to-cart">Add to Cart</button>
+                    </div>
+                </div>
+            </a>
+                <!-- Anklet Product 3 -->
+                 <a href="anklet_details.html" style="text-decoration:none; color: inherit;">
+                <div class="anklet-product">
+                    <div class="product-image-container">
+                        <img src="anklet3.webp" alt="Beaded Anklet" class="product-image">
+                        <img src="anklet3_hover.webp" alt="Beaded Anklet worn" class="product-image-hover">
+                        <button class="wishlist-btn" onclick="toggleWishlist(this, 103)">
+                            <svg class="wishlist-icon" viewBox="0 0 24 24">
+                                <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
+                            </svg>
+                        </button>
+                        <div class="size-availability">
+                            <h4>SELECT SIZE</h4>
+                            <div class="size-list">
+                                <span class="size-item">S</span>
+                                <span class="size-item">M</span>
+                                <span class="size-item">L</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="product-info">
+                        <div class="product-details">
+                            <h3>Gold Loop Anklet</h3>
+                            <p class="price">Rs. 35,000.00</p>
+                        </div>
+                        <button class="add-to-cart">Add to Cart</button>
+                    </div>
+                </div>
+                </a>
+
+                <!-- Anklet Product 4 -->
+                 <a href="anklet_details.html" style="text-decoration:none; color: inherit;">
+                <div class="anklet-product">
+                    <div class="product-image-container">
+                        <img src="anklet4.webp" alt="Layered Anklet" class="product-image">
+                        <img src="anklet4_hover.webp" alt="Layered Anklet worn" class="product-image-hover">
+                        <button class="wishlist-btn" onclick="toggleWishlist(this, 104)">
+                            <svg class="wishlist-icon" viewBox="0 0 24 24">
+                                <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
+                            </svg>
+                        </button>
+                        <div class="size-availability">
+                            <h4>SELECT SIZE</h4>
+                            <div class="size-list">
+                                <span class="size-item">S</span>
+                                <span class="size-item">M</span>
+                                <span class="size-item">L</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="product-info">
+                        <div class="product-details">
+                            <h3>Pearl Anklet</h3>
+                            <p class="price">Rs. 15,000.00</p>
+                        </div>
+                        <button class="add-to-cart">Add to Cart</button>
+                    </div>
+                </div>
+                </a>
+
+                <!-- Anklet Product 5 -->
+                 <a href="anklet_details.html" style="text-decoration:none; color: inherit;">
+                <div class="anklet-product">
+                    <div class="product-image-container">
+                        <img src="anklet5.webp" alt="Pearl Anklet" class="product-image">
+                        <img src="anklet5_hover.webp" alt="Pearl Anklet worn" class="product-image-hover">
+                        <button class="wishlist-btn" onclick="toggleWishlist(this, 105)">
+                            <svg class="wishlist-icon" viewBox="0 0 24 24">
+                                <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
+                            </svg>
+                        </button>
+                        <div class="size-availability">
+                            <h4>SELECT SIZE</h4>
+                            <div class="size-list">
+                                <span class="size-item">S</span>
+                                <span class="size-item">M</span>
+                                <span class="size-item">L</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="product-info">
+                        <div class="product-details">
+                            <h3>Pearl Anklet</h3>
+                            <p class="price">Rs. 10,000.00</p>
+                        </div>
+                        <button class="add-to-cart">Add to Cart</button>
+                    </div>
+                </div>
+                </a>
+
+                <!-- Anklet Product 6 -->
+                 <a href="anklet_details.html" style="text-decoration:none; color: inherit;">
+                <div class="anklet-product">
+                    <div class="product-image-container">
+                        <img src="anklet6.webp" alt="Minimalist Anklet" class="product-image">
+                        <img src="anklet6_hover.webp" alt="Minimalist Anklet worn" class="product-image-hover">
+                        <button class="wishlist-btn" onclick="toggleWishlist(this, 106)">
+                            <svg class="wishlist-icon" viewBox="0 0 24 24">
+                                <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
+                            </svg>
+                        </button>
+                        <div class="size-availability">
+                            <h4>SELECT SIZE</h4>
+                            <div class="size-list">
+                                <span class="size-item">S</span>
+                                <span class="size-item">M</span>
+                                <span class="size-item">L</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="product-info">
+                        <div class="product-details">
+                            <h3>Layered Star Anklet</h3>
+                            <p class="price">Rs. 14,000.00</p>
+                        </div>
+                        <button class="add-to-cart">Add to Cart</button>
+                    </div>
+                </div>
+                </a>
+
+                <!-- Anklet Product 7 -->
+                 <a href="anklet_details.html" style="text-decoration:none; color: inherit;">
+                <div class="anklet-product">
+                    <div class="product-image-container">
+                        <img src="anklet7.webp" alt="Diamond Anklet" class="product-image">
+                        <img src="anklet7_hover.webp" alt="Diamond Anklet worn" class="product-image-hover">
+                        <button class="wishlist-btn" onclick="toggleWishlist(this, 107)">
+                            <svg class="wishlist-icon" viewBox="0 0 24 24">
+                                <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
+                            </svg>
+                        </button>
+                        <div class="size-availability">
+                            <h4>SELECT SIZE</h4>
+                            <div class="size-list">
+                                <span class="size-item">S</span>
+                                <span class="size-item">M</span>
+                                <span class="size-item">L</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="product-info">
+                        <div class="product-details">
+                            <h3>Blue Accent Layered Anklet</h3>
+                            <p class="price">Rs. 20,850.00</p>
+                        </div>
+                        <button class="add-to-cart">Add to Cart</button>
+                    </div>
+                </div>
+                </a>
+
+    <!-- Anklet Product 9 -->
+     <a href="anklet_details.html" style="text-decoration:none; color: inherit;">
+                <div class="anklet-product">
+                    <div class="product-image-container">
+                        <img src="anklet9.webp" alt="Shell Anklet" class="product-image">
+                        <img src="anklet9_hover.webp" alt="Shell Anklet worn" class="product-image-hover">
+                        <button class="wishlist-btn" onclick="toggleWishlist(this, 108)">
+                            <svg class="wishlist-icon" viewBox="0 0 24 24">
+                                <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
+                            </svg>
+                        </button>
+                        <div class="size-availability">
+                            <h4>SELECT SIZE</h4>
+                            <div class="size-list">
+                                <span class="size-item">S</span>
+                                <span class="size-item">M</span>
+                                <span class="size-item">L</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="product-info">
+                        <div class="product-details">
+                            <h3>Multicolor Beaded Anklet</h3>
+                            <p class="price">Rs. 30,000.00</p>
+                        </div>
+                        <button class="add-to-cart">Add to Cart</button>
+                    </div>
+                </div>
+                </a>
+
+    <!-- Anklet Product 10 -->
+     <a href="anklet_details.html" style="text-decoration:none; color: inherit;">
+                <div class="anklet-product">
+                    <div class="product-image-container">
+                        <img src="anklet10.webp" alt="Shell Anklet" class="product-image">
+                        <img src="anklet10_hover.webp" alt="Shell Anklet worn" class="product-image-hover">
+                        <button class="wishlist-btn" onclick="toggleWishlist(this, 108)">
+                            <svg class="wishlist-icon" viewBox="0 0 24 24">
+                                <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
+                            </svg>
+                        </button>
+                        <div class="size-availability">
+                            <h4>SELECT SIZE</h4>
+                            <div class="size-list">
+                                <span class="size-item">S</span>
+                                <span class="size-item">M</span>
+                                <span class="size-item">L</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="product-info">
+                        <div class="product-details">
+                            <h3>Dual Anklet</h3>
+                            <p class="price">Rs. 18,000.00</p>
+                        </div>
+                        <button class="add-to-cart">Add to Cart</button>
+                    </div>
+                </div>
+                </a>
+
+    <!-- Anklet Product 11 -->
+     <a href="anklet_details.html" style="text-decoration:none; color: inherit;">                <div class="anklet-product">
+                    <div class="product-image-container">
+                        <img src="anklet11.jpg" alt="Shell Anklet" class="product-image">
+                        <img src="anklet11_hover.webp" alt="Shell Anklet worn" class="product-image-hover">
+                        <button class="wishlist-btn" onclick="toggleWishlist(this, 108)">
+                            <svg class="wishlist-icon" viewBox="0 0 24 24">
+                                <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
+                            </svg>
+                        </button>
+                        <div class="size-availability">
+                            <h4>SELECT SIZE</h4>
+                            <div class="size-list">
+                                <span class="size-item">S</span>
+                                <span class="size-item">M</span>
+                                <span class="size-item">L</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="product-info">
+                        <div class="product-details">
+                            <h3>Chained Charm Anklet</h3>
+                            <p class="price">Rs. 28,100.00</p>
+                        </div>
+                        <button class="add-to-cart">Add to Cart</button>
+                    </div>
+                </div>
+                </a>
+
+    <!-- Anklet Product 12 -->
+     <a href="anklet_details.html" style="text-decoration:none; color: inherit;">
+                <div class="anklet-product">
+                    <div class="product-image-container">
+                        <img src="anklet12.webp" alt="Shell Anklet" class="product-image">
+                        <img src="anklet12_hover.webp" alt="Shell Anklet worn" class="product-image-hover">
+                        <button class="wishlist-btn" onclick="toggleWishlist(this, 108)">
+                            <svg class="wishlist-icon" viewBox="0 0 24 24">
+                                <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
+                            </svg>
+                        </button>
+                        <div class="size-availability">
+                            <h4>SELECT SIZE</h4>
+                            <div class="size-list">
+                                <span class="size-item">S</span>
+                                <span class="size-item">M</span>
+                                <span class="size-item">L</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="product-info">
+                        <div class="product-details">
+                            <h3>Silver Wave Anklet</h3>
+                            <p class="price">Rs. 15,350.00</p>
+                        </div>
+                        <button class="add-to-cart">Add to Cart</button>
+                    </div>
+                </div>
+                </a>
+
+    <!-- Anklet Product 13 -->
+     <a href="anklet_details.html" style="text-decoration:none; color: inherit;">
+                <div class="anklet-product">
+                    <div class="product-image-container">
+                        <img src="anklet13.webp" alt="Shell Anklet" class="product-image">
+                        <img src="anklet13_hover.webp" alt="Shell Anklet worn" class="product-image-hover">
+                        <button class="wishlist-btn" onclick="toggleWishlist(this, 108)">
+                            <svg class="wishlist-icon" viewBox="0 0 24 24">
+                                <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
+                            </svg>
+                        </button>
+                        <div class="size-availability">
+                            <h4>SELECT SIZE</h4>
+                            <div class="size-list">
+                                <span class="size-item">S</span>
+                                <span class="size-item">M</span>
+                                <span class="size-item">L</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="product-info">
+                        <div class="product-details">
+                            <h3>Charm Anklet</h3>
+                            <p class="price">Rs. 30,000.00</p>
+                        </div>
+                        <button class="add-to-cart">Add to Cart</button>
+                    </div>
+                </div>
+                </a>
+
+                 <!-- Anklet Product 14 -->
+                  <a href=anklet_details.html" style="text-decoration:none; color: inherit;">
+                <div class="anklet-product">
+                    <div class="product-image-container">
+                        <img src="anklet14.webp" alt="Shell Anklet" class="product-image">
+                        <img src="anklet14_hover.webp" alt="Shell Anklet worn" class="product-image-hover">
+                        <button class="wishlist-btn" onclick="toggleWishlist(this, 108)">
+                            <svg class="wishlist-icon" viewBox="0 0 24 24">
+                                <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
+                            </svg>
+                        </button>
+                        <div class="size-availability">
+                            <h4>SELECT SIZE</h4>
+                            <div class="size-list">
+                                <span class="size-item">S</span>
+                                <span class="size-item">M</span>
+                                <span class="size-item">L</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="product-info">
+                        <div class="product-details">
+                            <h3>Blue Teardrop Anklet</h3>
+                            <p class="price">Rs. 24,000.00</p>
+                        </div>
+                        <button class="add-to-cart">Add to Cart</button>
+                    </div>
+                </div>
+                  </a>
+
+                 <!-- Anklet Product 15 -->
+                  <a href="anklet_details.html" style="text-decoration:none; color: inherit;">                <div class="anklet-product">
+                    <div class="product-image-container">
+                        <img src="anklet15.webp" alt="Shell Anklet" class="product-image">
+                        <img src="anklet15_hover.webp" alt="Shell Anklet worn" class="product-image-hover">
+                        <button class="wishlist-btn" onclick="toggleWishlist(this, 108)">
+                            <svg class="wishlist-icon" viewBox="0 0 24 24">
+                                <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
+                            </svg>
+                        </button>
+                        <div class="size-availability">
+                            <h4>SELECT SIZE</h4>
+                            <div class="size-list">
+                                <span class="size-item">S</span>
+                                <span class="size-item">M</span>
+                                <span class="size-item">L</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="product-info">
+                        <div class="product-details">
+                            <h3>Tiny Coin Anklet</h3>
+                            <p class="price">Rs. 22,000.00</p>
+                        </div>
+                        <button class="add-to-cart">Add to Cart</button>
+                    </div>
+                </div>
+                </a>
+
+    <!-- Anklet Product 16 -->
+     <a href="anklet_details.html" style="text-decoration:none; color: inherit;">
+                <div class="anklet-product">
+                    <div class="product-image-container">
+                        <img src="anklet16.webp" alt="Shell Anklet" class="product-image">
+                        <img src="anklet16_hover.webp" alt="Shell Anklet worn" class="product-image-hover">
+                        <button class="wishlist-btn" onclick="toggleWishlist(this, 108)">
+                            <svg class="wishlist-icon" viewBox="0 0 24 24">
+                                <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
+                            </svg>
+                        </button>
+                        <div class="size-availability">
+                            <h4>SELECT SIZE</h4>
+                            <div class="size-list">
+                                <span class="size-item">S</span>
+                                <span class="size-item">M</span>
+                                <span class="size-item">L</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="product-info">
+                        <div class="product-details">
+                            <h3>Teardrop Anklet</h3>
+                            <p class="price">Rs. 18,000.00</p>
+                        </div>
+                        <button class="add-to-cart">Add to Cart</button>
+                    </div>
+                </div>
+     </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-grid">
+                <div class="footer-column">
+                    <h3>Contact</h3>
+                    <ul>
+                        <li><a>Customer Service</a></li>
+                        <li><a>Size Guide</a></li>
+                        <li><a>Care Guide</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Information</h3>
+                    <ul>
+                        <li><a>Shipping</a></li>
+                        <li><a>Returns</a></li>
+                        <li><a>Exchange</a></li>
+                        <li><a>Privacy Policy</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>About Us</h3>
+                    <ul>
+                        <li><a>Our Story</a></li>
+                        <li><a>Sustainability</a></li>
+                        <li><a>Press</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Jewelry</h3>
+                    <ul>
+                        <li><a href="index.html">Necklaces</a></li>
+                        <li><a href="index.html">Earrings</a></li>
+                        <li><a href="index.html">Rings</a></li>
+                        <li><a href="index.html">Bracelets</a></li>
+                        <li><a href="anklets_page.html">Anklets</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <div class="newsletter">
+                    <h4>Want 10% off your first order? Sign up!</h4>
+                    <form class="newsletter-form" onsubmit="handleNewsletterSubmit(event)">
+                        <input type="email" name="email" placeholder="Enter your email" required>
+                        <button type="submit" class="btn-newsletter">Subscribe</button>
+                    </form>
+                </div>
+                <div class="social">
+                    <span>Follow us:</span>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        let wishlist = JSON.parse(localStorage.getItem('wishlist')) || [];
+
+        function toggleWishlist(button, productId) {
+            const icon = button.querySelector('.wishlist-icon');
+            
+            if (wishlist.includes(productId)) {
+                wishlist = wishlist.filter(id => id !== productId);
+                icon.classList.remove('filled');
+            } else {
+                wishlist.push(productId);
+                icon.classList.add('filled');
+            }
+            
+            localStorage.setItem('wishlist', JSON.stringify(wishlist));
+        }
+
+        function loadWishlist() {
+            wishlist.forEach(productId => {
+                const button = document.querySelector(`[onclick*="${productId}"]`);
+                if (button) {
+                    const icon = button.querySelector('.wishlist-icon');
+                    if (icon) {
+                        icon.classList.add('filled');
+                    }
+                }
+            });
+        }
+
+        function handleNewsletterSubmit(event) {
+            event.preventDefault();
+            const formData = new FormData(event.target);
+            const email = formData.get('email');
+            
+            if (email) {
+                alert(`Thank you for subscribing with ${email}!`);
+                event.target.reset();
+            } else {
+                alert('Please enter a valid email address.');
+            }
+        }
+
+        // Filter functionality
+        document.querySelectorAll('.filter-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+                this.classList.add('active');
+            });
+        });
+
+        // Load wishlist on page load
+        document.addEventListener('DOMContentLoaded', loadWishlist);
+    </script>
+</body>
+</html>
