@@ -24,7 +24,7 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 0.75rem 1.5rem;
+            padding: 0.75rem clamp(1rem, 4vw, 2rem);
             background: #0A2342;
             position: sticky;
             top: 0;
@@ -81,7 +81,7 @@
         }
 
         .dropdown-content {
-            max-width: 1300px;
+            max-width: 1400px;
             margin: 0 auto;
             display: flex;
             padding: 2rem;
@@ -117,7 +117,7 @@
 
         .logo {
             font-family: 'Arsenal', sans-serif;
-            font-size:2.5rem;
+            font-size: clamp(1.5rem, 4vw, 2.5rem);
             font-weight: bold;
             letter-spacing: 0.1em;
             text-decoration: none;
@@ -156,21 +156,21 @@
             stroke-width: 2;
         }
 
-
         /* Main Content */
         .anklets-page {
             max-width: 100%;
             margin: 0 auto;
-            padding: 1rem;
+            padding: clamp(0.5rem, 2vw, 1rem);
             min-height: 100vh;
         }
 
         .breadcrumb {
             padding: 1rem 0;
-            font-size: 0.9rem;
+            font-size: clamp(0.8rem, 1.5vw, 0.9rem);
             color: #666;
-            max-width: 1400px;
-            margin-left: 25px;
+            max-width: 1600px;
+            margin: 0 auto;
+            padding-left: clamp(1rem, 3vw, 2rem);
         }
 
         .breadcrumb a {
@@ -185,12 +185,13 @@
 
         .page-title {
             text-align: left;
-            margin-left: 20px;
-            margin-bottom: 2rem;
+            margin: 0 auto clamp(1rem, 3vw, 2rem);
+            max-width: 1600px;
+            padding-left: clamp(1rem, 3vw, 2rem);
         }
 
         .page-title h1 {
-            font-size: 2.5rem;
+            font-size: clamp(1.8rem, 4vw, 2.5rem);
             font-weight: 300;
             margin-bottom: 0.5rem;
             letter-spacing: 0.1em;
@@ -198,16 +199,22 @@
 
         .page-title p {
             color: #666;
-            font-size: 1rem;
+            font-size: clamp(0.9rem, 1.8vw, 1rem);
         }
 
         .filter-options {
             font-family: 'Arsenal', sans-serif;
             display: flex;
-            gap: 1rem;
-            margin-bottom: 2rem;
+            gap: clamp(0.5rem, 2vw, 1rem);
+            margin-bottom: clamp(1rem, 3vw, 2rem);
             padding-bottom: 0.5rem;
-            margin-left: 20px;
+            max-width: 1600px;
+            margin-left: auto;
+            margin-right: auto;
+            padding-left: clamp(1rem, 3vw, 2rem);
+            padding-right: clamp(1rem, 3vw, 2rem);
+            overflow-x: auto;
+            flex-wrap: wrap;
         }
 
         .filter-btn {
@@ -218,7 +225,8 @@
             cursor: pointer;
             white-space: nowrap;
             transition: all 0.3s;
-            font-size: 0.8rem;
+            font-size: clamp(0.7rem, 1.4vw, 0.8rem);
+            flex-shrink: 0;
         }
 
         .filter-btn:hover, .filter-btn.active {
@@ -229,14 +237,17 @@
 
         .anklets-content {
             display: block;
-            max-width: 1400px;
+            max-width: 1600px;
             margin: 0 auto;
         }
 
         .anklets-grid {
             display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 2rem;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: clamp(1rem, 3vw, 2rem);
+            max-width: 1600px;
+            margin: 0 auto;
+            padding: 0 clamp(1rem, 3vw, 2rem);
         }
 
         .anklet-product {
@@ -318,20 +329,26 @@
             justify-content: space-between;
             align-items: center;
             padding: 1rem;
+            gap: 1rem;
         }
 
         .product-details {
             flex: 1;
+            min-width: 0;
         }
 
         .product-details h3 {
-            font-size: 0.9rem;
+            font-size: clamp(0.8rem, 1.5vw, 0.9rem);
             font-weight: 500;
             margin-bottom: 0.5rem;
+            line-height: 1.3;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
         }
 
         .product-details .price {
-            font-size: 1rem;
+            font-size: clamp(0.9rem, 1.8vw, 1rem);
             font-weight: 600;
             color: #333;
         }
@@ -342,12 +359,13 @@
             border: 2px solid #333;
             border-radius: 20px;
             cursor: pointer;
-            font-size: 0.8rem;
+            font-size: clamp(0.7rem, 1.2vw, 0.8rem);
             transition: all 0.3s ease;
             color: #333;
             font-weight: 500;
             text-align: center;
             white-space: nowrap;
+            flex-shrink: 0;
         }
 
         .add-to-cart:hover {
@@ -377,10 +395,10 @@
         }
 
         .size-availability h4 {
-            background: #0A2342 35%;
+            background: #0A2342;
             color: white;
             padding: 0.5rem;
-            font-size: 0.8rem;
+            font-size: clamp(0.7rem, 1.2vw, 0.8rem);
             margin: 0;
             font-weight: 500;
             text-transform: uppercase;
@@ -399,7 +417,7 @@
             border: none;
             border-radius: 4px;
             padding: 0.25rem;
-            font-size: 0.9rem;
+            font-size: clamp(0.8rem, 1.4vw, 0.9rem);
             font-weight: 600;
             min-width: 30px;
             cursor: pointer;
@@ -420,9 +438,9 @@
         }
 
         .footer-content {
-            max-width: 1400px;
+            max-width: 1600px;
             margin: 0 auto;
-            padding: 0 1rem;
+            padding: 0 clamp(1rem, 4vw, 2rem);
         }
 
         .footer-grid {
@@ -470,6 +488,7 @@
         .newsletter {
             flex: 1;
             max-width: 350px;
+            min-width: 280px;
         }
 
         .newsletter h4 {
@@ -519,10 +538,26 @@
             color: #d1d5db;
         }
 
-        /* Mobile Responsive */
-        @media (max-width: 992px) {
+        /* Enhanced Responsive Design */
+        @media (min-width: 1200px) {
+            .header {
+                padding: 0.75rem 4rem;
+            }
+            
+            .dropdown-content {
+                max-width: 1800px;
+            }
+        }
+
+        @media (min-width: 1400px) {
             .anklets-grid {
-                grid-template-columns: repeat(3, 1fr);
+                grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            }
+        }
+
+        @media (min-width: 1600px) {
+            .anklets-grid {
+                grid-template-columns: repeat(5, 1fr);
             }
         }
 
@@ -531,41 +566,79 @@
                 display: none;
             }
 
+            .dropdown-menu {
+                min-width: 300px;
+                left: -100px;
+            }
+
+            .dropdown-content {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
             .anklets-grid {
-                grid-template-columns: repeat(2, 1fr);
+                grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
                 gap: 1rem;
             }
 
             .filter-options {
-                padding: 0 0.75rem;
+                padding: 0 1rem;
                 justify-content: flex-start;
-            }
-
-            .page-title h1 {
-                font-size: 2rem;
+                overflow-x: auto;
+                flex-wrap: nowrap;
             }
 
             .footer-bottom {
                 flex-direction: column;
                 text-align: center;
             }
-        }
 
-        @media (max-width: 480px) {
             .header {
                 padding: 0.5rem 1rem;
             }
+        }
 
+        @media (max-width: 480px) {
             .logo {
-                font-size: 1.1rem;
+                font-size: clamp(1.2rem, 5vw, 1.8rem);
             }
 
             .anklets-grid {
-                grid-template-columns: 1fr;
+                grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+                gap: 0.5rem;
             }
 
-            .page-title h1 {
-                font-size: 1.5rem;
+            .product-details h3 {
+                font-size: 0.75rem;
+            }
+
+            .product-details .price {
+                font-size: 0.85rem;
+            }
+
+            .add-to-cart {
+                padding: 0.3rem 0.6rem;
+                font-size: 0.65rem;
+            }
+
+            .filter-btn {
+                font-size: 0.7rem;
+                padding: 0.4rem 0.8rem;
+            }
+        }
+
+        /* Ultra-wide screen support */
+        @media (min-width: 1920px) {
+            .header {
+                padding: 0.75rem 6rem;
+            }
+            
+            .footer-content {
+                max-width: 1800px;
+            }
+            
+            .dropdown-content {
+                max-width: 1800px;
             }
         }
     </style>
@@ -961,7 +1034,7 @@
                 </a>
 
                  <!-- Anklet Product 14 -->
-                  <a href=anklet_details.html" style="text-decoration:none; color: inherit;">
+                  <a href="anklet_details.html" style="text-decoration:none; color: inherit;">
                 <div class="anklet-product">
                     <div class="product-image-container">
                         <img src="anklet14.webp" alt="Shell Anklet" class="product-image">
